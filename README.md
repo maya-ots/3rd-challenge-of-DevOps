@@ -51,3 +51,41 @@ Inside it, create nginx.conf:
       }
     }
 
+🔹 upstream block defines the 3 app instances
+🔹 NGINX automatically load-balances (round-robin by default)
+
+4️⃣ Create docker-compose.yml
+This is the core of the challenge.
+
+       version: "3.9"
+
+    services:
+    app1:
+    build: .
+    container_name: app1
+    expose:
+      - "3000"
+
+    app2:
+    build: .
+    container_name: app2
+    expose:
+      - "3000"
+
+    app3:
+    build: .
+    container_name: app3
+    expose:
+      - "3000"
+
+    nginx:
+    image: nginx:alpine
+    container_name: nginx-lb
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app1
+      - app2
+      - app3
