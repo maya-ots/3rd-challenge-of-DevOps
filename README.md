@@ -23,4 +23,5 @@ This image will be reused for all 3 instances.
     COPY . .
     EXPOSE 3000
     CMD ["npm", "start"]
+Builds one image, runs multiple containers.
 
