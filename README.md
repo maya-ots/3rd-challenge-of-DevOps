@@ -94,3 +94,8 @@ Key points:
 expose → internal communication only
 ports → only NGINX is exposed to the host
 All services share the same Docker network automatically
+
+Build and start everything
+Run:
+
+    docker compose up --build
