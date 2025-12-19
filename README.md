@@ -25,3 +25,29 @@ This image will be reused for all 3 instances.
     CMD ["npm", "start"]
 Builds one image, runs multiple containers.
 
+3️⃣ Create the NGINX configuration (load balancer)
+Create a folder: 
+
+    nginx/
+Inside it, create nginx.conf:
+
+    events {}
+
+    http {
+    upstream app_backend {
+        server app1:3000;
+        server app2:3000;
+        server app3:3000;
+     }
+
+    server {
+        listen 80;
+
+        location / {
+            proxy_pass http://app_backend;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+      }
+    }
+
