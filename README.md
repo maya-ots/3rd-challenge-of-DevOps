@@ -16,7 +16,6 @@ Not hardcode host/port values
 This image will be reused for all 3 instances.
 
     Example (Node.js):
-    ```node.js
     FROM node:20-alpine
     WORKDIR /app
     COPY package*.json ./
